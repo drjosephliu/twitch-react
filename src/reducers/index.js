@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import UserReducer from './reducer_user';
+import UsersReducer from './reducer_users';
 import HasErroredReducer from './reducer_has_errored';
 
 const rootReducer = combineReducers({
-  user: UserReducer,
+  users: UsersReducer,
   error: HasErroredReducer
 });
 
