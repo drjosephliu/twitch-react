@@ -10,7 +10,7 @@ class SelectedUser extends Component {
     else {
       var { name } = this.props.selectedUser.channelData;
     }
-    const stream_url = `http://player.twitch.tv/?muted=true&channel=${name}`;
+    const stream_url = `https://player.twitch.tv/?muted=true&channel=${name}`;
 
     return(
       <div className='col-sm-8 stream-detail'>
