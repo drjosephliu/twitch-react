@@ -10,8 +10,8 @@ const ROOT_URL = 'https://api.twitch.tv/kraken/';
 const CLIENT_ID = 'dodzc4a28o42j2p4orh98a75e84uax';
 
 export function fetchUser(user) {
-  const channelUrl = `${ROOT_URL}/channels/${user}?client_id=${CLIENT_ID}`;
-  const streamUrl = `${ROOT_URL}/streams/${user}?client_id=${CLIENT_ID}`;
+  const channelUrl = `${ROOT_URL}/channels/${user}?client_id=${CLIENT_ID}&callback=`;
+  const streamUrl = `${ROOT_URL}/streams/${user}?client_id=${CLIENT_ID}&callback=`;
 
   const request = axios.all([
     axios.get(channelUrl),
