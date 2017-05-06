@@ -12,3 +12,36 @@ h1 {
   width: 70%;
   margin: 20px auto;
 }
+
+.alert-danger {
+  width: 70%;
+  margin: 0px auto 20px;
+}
+
+.btn-group {
+  margin: 20px;
+}
+
+.list-item {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: center;
+}
+
+.user-logo {
+  width: 30px;
+}
+
+.online {
+  color: green;
+}
+
+.offline {
+  color: red;
+}
+
+/*.stream-detail {
+  padding: 20px;
+}*/

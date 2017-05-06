@@ -44,9 +44,15 @@ class SearchBar extends Component {
             </button>
           </span>
         </form>
+
+        {this.props.error && <div className='alert alert-danger'>{this.props.error}</div>}
       </div>
     )
   }
 }
 
-export default connect(null, { fetchUser })(SearchBar);
+function mapStateToProps({ error }) {
+  return { error };
+}
+
+export default connect(mapStateToProps, { fetchUser })(SearchBar);

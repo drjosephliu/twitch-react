@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import SearchBar from '../containers/search_bar';
-import Stream from '../containers/stream';
+import SelectedUser from '../containers/selected_user';
 import UsersList from '../containers/users_list';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return(
       <div className='container'>
         <h1>Twitch API Widget</h1>
         <SearchBar />
-        <Stream />
-        <UsersList />
+        {/* {this.props.users.show.length == 0 ? null : */}
+        <div><SelectedUser />
+        <UsersList /></div>
       </div>
     )
   }
 }
+
+function mapStateToProps({ selectedUser, users }) {
+  return { selectedUser, users };
+}
+
+export default connect(mapStateToProps)(App);
