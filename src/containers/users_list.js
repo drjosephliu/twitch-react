@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectUser, showOnline, showOffline, showAll } from '../actions/index';
+import FlipMove from 'react-flip-move';
+import { selectUser, fetchUser, removeUser } from '../actions/index';
 
 class UsersList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: 'all',
+    };
+    this.fetchInitialUsers(this.props.initialUsers);
+  }
+
+  fetchInitialUsers(users) {
+    users.map(this.props.fetchUser);
+  }
 
   renderUser(user) {
     const { channelData, streamData } = user;
-
     return (
       <tr
         key={channelData.display_name}
@@ -22,34 +33,56 @@ class UsersList extends Component {
           {streamData.stream ?
             <span className='online'>Online</span> :
             <span className='offline'>Offline</span>}
+
         </td>
+        <span
+          className="glyphicon glyphicon-remove"
+          onClick={() => this.props.removeUser(user)}></span>
       </tr>
     )
   }
 
+  showOnline() {
+    this.setState({
+      show: 'online'
+    });
+  }
+
+  showOffline() {
+    this.setState({
+      show: 'offline'
+    });
+  }
+
+  showAll() {
+    this.setState({
+      show: 'all'
+    });
+  }
+
   render() {
-    console.log('state:', this.props.users);
     return (
       <div className='col-sm-4'>
         <div className='text-center'>
           <div className='btn-group btn-group-sm' role='group'>
             <button
               className='btn btn-default'
-              onClick={this.props.showAll}>
+              onClick={this.showAll.bind(this)}>
               All
             </button>
             <button
               className='btn btn-default'
-              onClick={this.props.showOnline}>
+              onClick={this.showOnline.bind(this)}>
               Online
             </button>
             <button
               className='btn btn-default'
-              onClick={this.props.showOffline}>
+              onClick={this.showOffline.bind(this)}>
               Offline
             </button>
           </div>
         </div>
+        <div className='container'>
         <table className='table table-hover'>
           <thead>
             <tr>
@@ -58,17 +91,34 @@ class UsersList extends Component {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            {this.props.users.map(this.renderUser.bind(this))}
-          </tbody>
+          {/* <tbody> */}
+            <FlipMove
+              typeName='tbody' enterAnimation='fade'
+              leaveAnimation='fade'>
+              {this.props.users.filter(user => {
+                const { show } = this.state;
+                const { streamData } = user;
+                if (show == 'online') {
+                  return streamData.stream;
+                }
+                else if (show == 'offline') {
+                  return !streamData.stream;
+                }
+                else {
+                  return user;
+                }
+              }).map(this.renderUser.bind(this))}
+            </FlipMove>
+          {/* </tbody> */}
         </table>
+      </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ users }) {
-  return { users };
+function mapStateToProps({ users, initialUsers }) {
+  return { users, initialUsers };
 }
 
-export default connect(mapStateToProps, { selectUser, showOnline, showOffline, showAll })(UsersList);
+export default connect(mapStateToProps, { selectUser, fetchUser, removeUser })(UsersList);

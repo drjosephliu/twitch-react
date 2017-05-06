@@ -42,6 +42,10 @@ th, td {
   color: red;
 }
 
+.glyphicon {
+  margin: 12px 20px;
+}
+
 /*.stream-detail {
   padding: 20px;
 }*/

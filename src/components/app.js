@@ -11,9 +11,8 @@ class App extends Component {
       <div className='container'>
         <h1>Twitch API Widget</h1>
         <SearchBar />
-        {/* {this.props.users.show.length == 0 ? null : */}
-        <div><SelectedUser />
-        <UsersList /></div>
+        <SelectedUser />
+        <UsersList />
       </div>
     )
   }

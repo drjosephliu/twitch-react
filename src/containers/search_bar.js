@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions/index';
+import { fetchUser, fetchSuggestions } from '../actions/index';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -16,7 +16,13 @@ class SearchBar extends Component {
     this.setState({
       term: event.target.value
     });
-    console.log(this.state.term);
+  setTimeout( this.props.fetchSuggestions(event.target.value), 300);
+  }
+
+  renderSuggestions(sug, i) {
+    return (
+      <option key={i} value={sug.display_name} />
+    )
   }
 
   onFormSubmit(event) {
@@ -28,6 +34,7 @@ class SearchBar extends Component {
   }
 
   render() {
+    const { error, suggestions } = this.props;
     return (
       <div>
         <form
@@ -37,22 +44,27 @@ class SearchBar extends Component {
             className='form-control'
             placeholder='Search for a Twitch user'
             value={this.state.term}
-            onChange={this.onInputChange}/>
+            onChange={this.onInputChange}
+            list='suggestions'
+            ref='input'/>
           <span className='input-group-btn'>
             <button className='btn btn-primary'>
               Search
             </button>
           </span>
+          <datalist id='suggestions'>
+            {suggestions.map(this.renderSuggestions)}
+          </datalist>
         </form>
 
-        {this.props.error && <div className='alert alert-danger'>{this.props.error}</div>}
+        {error && <div className='alert alert-danger'>{error}</div>}
       </div>
     )
   }
 }
 
-function mapStateToProps({ error }) {
-  return { error };
+function mapStateToProps({ error, suggestions }) {
+  return { error, suggestions };
 }
 
-export default connect(mapStateToProps, { fetchUser })(SearchBar);
+export default connect(mapStateToProps, { fetchUser, fetchSuggestions })(SearchBar);

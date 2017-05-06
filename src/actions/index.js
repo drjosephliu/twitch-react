@@ -3,15 +3,15 @@ import axios from 'axios';
 export const FETCH_USER = 'FETCH_USER';
 export const HAS_ERRORED = 'HAS_ERRORED';
 export const SELECTED_USER = 'SELECTED_USER';
-export const SHOW_ONLINE = 'SHOW_ONLINE';
-export const SHOW_OFFLINE = 'SHOW_OFFLINE';
-export const SHOW_ALL = 'SHOW_ALL';
+export const REMOVE_USER = 'REMOVE_USER';
+export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 
-const ROOT_URL = 'https://wind-bow.glitch.me/twitch-api/';
+const ROOT_URL = 'https://api.twitch.tv/kraken/';
+const CLIENT_ID = 'dodzc4a28o42j2p4orh98a75e84uax';
 
 export function fetchUser(user) {
-  const channelUrl = `${ROOT_URL}/channels/${user}`;
-  const streamUrl = `${ROOT_URL}/streams/${user}`;
+  const channelUrl = `${ROOT_URL}/channels/${user}?client_id=${CLIENT_ID}`;
+  const streamUrl = `${ROOT_URL}/streams/${user}?client_id=${CLIENT_ID}`;
 
   const request = axios.all([
     axios.get(channelUrl),
@@ -54,20 +54,27 @@ export function selectUser(user) {
   }
 }
 
-export function showOnline() {
+export function removeUser(user) {
   return {
-    type: SHOW_ONLINE
+    type: REMOVE_USER,
+    user
   }
 }
 
-export function showOffline() {
-  return {
-    type: SHOW_OFFLINE
-  }
+export function searchUser(term) {
+  const channelUrl = `${ROOT_URL}/search/channels/?q=${term}&client_id=${CLIENT_ID}`;
+
+  return axios.get(channelUrl);
 }
 
-export function showAll() {
-  return {
-    type: SHOW_ALL
+export function fetchSuggestions(term) {
+  return (dispatch) => {
+    searchUser(term).then((response) => {
+      const channels = response.data.channels;
+      dispatch({
+        type: FETCH_SUGGESTIONS,
+        channels
+      });
+    });
   }
 }

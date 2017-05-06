@@ -5,12 +5,11 @@ class SelectedUser extends Component {
   render() {
 
     if (this.props.selectedUser == null) {
-      return (
-        <div className='col-sm-8'></div>
-      )
+      var name = 'freecodecamp';
     }
-
-    const { name } = this.props.selectedUser.channelData;
+    else {
+      var { name } = this.props.selectedUser.channelData;
+    }
     const stream_url = `http://player.twitch.tv/?muted=true&channel=${name}`;
 
     return(
