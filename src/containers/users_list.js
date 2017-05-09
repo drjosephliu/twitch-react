@@ -21,23 +21,21 @@ class UsersList extends Component {
     return (
       <tr
         key={channelData.display_name}
-        onClick={() => this.props.selectUser(user)}
         className='list-item'>
-        <td>
+        <td onClick={() => this.props.selectUser(user)}>
           <img src={channelData.logo} className='user-logo' />
         </td>
-        <td>
+        <td onClick={() => this.props.selectUser(user)}>
           {channelData.display_name}
         </td>
         <td>
           {streamData.stream ?
             <span className='online'>Online</span> :
             <span className='offline'>Offline</span>}
-
+            <span
+              className="glyphicon glyphicon-remove"
+              onClick={() => this.props.removeUser(user)}></span>
         </td>
-        <span
-          className="glyphicon glyphicon-remove"
-          onClick={() => this.props.removeUser(user)}></span>
       </tr>
     )
   }
@@ -62,9 +60,9 @@ class UsersList extends Component {
 
   render() {
     return (
-      <div className='col-sm-4'>
+      <div className='col-sm-4 users-list'>
         <div className='text-center'>
-          <div className='btn-group btn-group-sm' role='group'>
+          <div className='btn-group' role='group'>
             <button
               className='btn btn-default'
               onClick={this.showAll.bind(this)}>
@@ -82,17 +80,16 @@ class UsersList extends Component {
             </button>
           </div>
         </div>
-        <div className='container'>
-        <table className='table table-hover'>
+        {/* <table className='table table-hover'>
           <thead>
             <tr>
               <th>Logo</th>
               <th>Channel</th>
               <th>Status</th>
             </tr>
-          </thead>
+          </thead> */}
           {/* <tbody> */}
-            <FlipMove
+            {/* <FlipMove
               typeName='tbody' enterAnimation='fade'
               leaveAnimation='fade'>
               {this.props.users.filter(user => {
@@ -108,10 +105,33 @@ class UsersList extends Component {
                   return user;
                 }
               }).map(this.renderUser.bind(this))}
+            </FlipMove> */}
+            <FlipMove
+              typeName='table'
+              className='table table-hover'
+              enterAnimation='fade'
+              leaveAnimation='fade'>
+              <tr>
+                <th>Logo</th>
+                <th>Channel</th>
+                <th>Status</th>
+              </tr>
+              {this.props.users.filter(user => {
+                const { show } = this.state;
+                const { streamData } = user;
+                if (show == 'online') {
+                  return streamData.stream;
+                }
+                else if (show == 'offline') {
+                  return !streamData.stream;
+                }
+                else {
+                  return user;
+                }
+              }).map(this.renderUser.bind(this))}
             </FlipMove>
           {/* </tbody> */}
-        </table>
-      </div>
+        {/* </table> */}
       </div>
     )
   }
