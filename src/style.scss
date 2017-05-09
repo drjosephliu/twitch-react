@@ -1,0 +1,96 @@
+$title-font: 'Bungee Shade', cursive;
+$primary-color: #4b367c;
+$secondary-color: #2c2541;
+$light-gray: #efeef1;
+$hover-color: #6441a5;
+
+body {
+  background-color: white;
+}
+
+.page-heading {
+  background-color: $primary-color;
+  width: 100%;
+}
+
+h1 {
+  margin: 5px 0px 10px 50px;
+  font: 36px 'Bungee Shade', cursive;
+  color: white;
+}
+
+.input-group {
+  margin-top: 10px;
+  margin-left: 0px;
+  width: 80%;
+}
+
+input {
+  border-radius: 0px !important;
+}
+
+.input-group-btn {
+  button {
+    border-radius: 0px;
+    border: 0px;
+    background-color: $secondary-color;
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+}
+
+.alert-danger {
+  width: 70%;
+  margin: 0px auto 20px;
+}
+
+.container {
+  padding: 30px;
+
+
+}
+
+.users-list {
+  background-color: $light-gray;
+  overflow: auto;
+  height: 402px;
+}
+
+.btn-group {
+  margin: 15px auto 5px;
+}
+
+table {
+  // margin-left: 15px;
+  background-color: white;
+}
+
+.list-item {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: center;
+  font-size: 12px;
+}
+
+.user-logo {
+  width: 30px;
+}
+
+.online {
+  color: green;
+}
+
+.offline {
+  color: red;
+}
+
+.glyphicon {
+  // margin: 12px 20px;
+}
+
+/*.stream-detail {
+  padding: 20px;
+}*/
