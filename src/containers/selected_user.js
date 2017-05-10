@@ -13,8 +13,8 @@ class SelectedUser extends Component {
     const stream_url = `https://player.twitch.tv/?muted=true&channel=${name}`;
 
     return(
-      <div className='col-sm-8 stream-detail'>
-        <div className= 'embed-responsive embed-responsive-16by9'>
+      <div className='stream-detail'>
+        <div className='embed-responsive embed-responsive-16by9'>
           <iframe
               src={stream_url}
               className='embed-responsive-item'

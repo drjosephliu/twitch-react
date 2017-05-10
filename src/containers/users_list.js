@@ -20,22 +20,22 @@ class UsersList extends Component {
     const { channelData, streamData } = user;
     return (
       <tr
-        key={channelData.display_name}
-        className='list-item'>
-        <td onClick={() => this.props.selectUser(user)}>
+        key={channelData.display_name}>
+        <td className='list-item' onClick={() => this.props.selectUser(user)}>
           <img src={channelData.logo} className='user-logo' />
         </td>
-        <td onClick={() => this.props.selectUser(user)}>
+        <td className='list-item' onClick={() => this.props.selectUser(user)}>
           {channelData.display_name}
         </td>
-        <td>
+        <td className='status'>
           {streamData.stream ?
-            <span className='online'>Online</span> :
-            <span className='offline'>Offline</span>}
+            <span className='online'></span> :
+            <span className='offline'></span>}
             <span
               className="glyphicon glyphicon-remove"
               onClick={() => this.props.removeUser(user)}></span>
         </td>
+
       </tr>
     )
   }
@@ -60,8 +60,7 @@ class UsersList extends Component {
 
   render() {
     return (
-      <div className='col-sm-4 users-list'>
-        <div className='text-center'>
+      <div className='users-list'>
           <div className='btn-group' role='group'>
             <button
               className='btn btn-default'
@@ -78,7 +77,6 @@ class UsersList extends Component {
               onClick={this.showOffline.bind(this)}>
               Offline
             </button>
-          </div>
         </div>
         {/* <table className='table table-hover'>
           <thead>
@@ -106,6 +104,7 @@ class UsersList extends Component {
                 }
               }).map(this.renderUser.bind(this))}
             </FlipMove> */}
+            <div className='table-scroll'>
             <FlipMove
               typeName='table'
               className='table table-hover'
@@ -130,6 +129,7 @@ class UsersList extends Component {
                 }
               }).map(this.renderUser.bind(this))}
             </FlipMove>
+          </div>
           {/* </tbody> */}
         {/* </table> */}
       </div>

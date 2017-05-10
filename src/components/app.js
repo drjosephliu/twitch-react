@@ -7,18 +7,15 @@ import UsersList from '../containers/users_list';
 
 class App extends Component {
   render() {
+    const { error } = this.props;
     return(
       <div>
-      <div className='container-fluid page-heading'>
-        <div className='col-sm-3'>
+      <div className='page-heading'>
           <h1>Twitch</h1>
-        </div>
-        <div className='col-sm-9'>
           <SearchBar />
-        </div>
       </div>
-      <div className='container'>
-
+      {error && <div className='alert alert-danger'>{error}</div>}
+      <div className='container-fluid'>
         <SelectedUser />
         <UsersList />
       </div>
@@ -27,8 +24,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ selectedUser, users }) {
-  return { selectedUser, users };
+function mapStateToProps({ selectedUser, users, error }) {
+  return { selectedUser, users, error };
 }
 
 export default connect(mapStateToProps)(App);
