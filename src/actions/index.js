@@ -6,7 +6,7 @@ export const SELECTED_USER = 'SELECTED_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 export const FETCH_SUGGESTIONS = 'FETCH_SUGGESTIONS';
 
-const ROOT_URL = 'https://api.twitch.tv/kraken/';
+const ROOT_URL = 'https://api.twitch.tv/kraken';
 const CLIENT_ID = 'dodzc4a28o42j2p4orh98a75e84uax';
 
 export function fetchUser(user) {
