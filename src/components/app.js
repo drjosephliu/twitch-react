@@ -14,6 +14,9 @@ class App extends Component {
           <h1>Twitch</h1>
           <SearchBar />
       </div>
+      <div className='footer'>
+        <p>(Source code on <a href='https://github.com/drhectapus/twitch-react' target='_blank'>Github</a>)</p>
+      </div>
       {error && <div className='alert alert-danger'>{error}</div>}
       <div className='container-fluid'>
         <SelectedUser />
