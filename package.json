@@ -36,7 +36,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.19.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-flip-move": "^2.9.7",
